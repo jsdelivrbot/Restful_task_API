@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 // Integrate body-parser with our App
 app.use(bodyParser.json());
 // Require Mongoose
+app.use(express.static( __dirname + '/task/dist' ));
 var mongoose = require('mongoose');
 // This is how we connect to the mongodb database using mongoose -- "1955" is the name of
 //   our db in mongodb -- this should match the name of the db you are going to use for your project.
@@ -21,7 +22,7 @@ var Task = mongoose.model('Task');
 // Use native promises
 mongoose.Promise = global.Promise;
 
-app.get('/', function(req, res){
+app.get('/task', function(req, res){
     Task.find({}, function(err, tasks){
         console.log(tasks);
         if(err){
@@ -34,7 +35,7 @@ app.get('/', function(req, res){
         };
     });
 });
-app.get('/:id', function(req, res){
+app.get('/task/:id', function(req, res){
     Task.findOne({_id: req.params.id}, function(err, task){
         if(err){
             console.log("Returned error", err);
@@ -46,7 +47,7 @@ app.get('/:id', function(req, res){
         };
     });
 });
-app.post('/new', function(req, res){
+app.post('/task/new', function(req, res){
     var task = new Task(req.body);
     console.log("new task", task);
     // Try to save that new eagle to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
@@ -61,7 +62,7 @@ app.post('/new', function(req, res){
         };
     });
 });
-app.put('/update/:id', function(req, res){
+app.put('/task/update/:id', function(req, res){
     var id = req.params.id;
     console.log(id);
     // Try to save that new eagle to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
@@ -76,7 +77,7 @@ app.put('/update/:id', function(req, res){
         };
     });
 });
-app.delete('/remove/:id', function(req, res){
+app.delete('/task/remove/:id', function(req, res){
     console.log("id param:", req.params.id);
     Task.remove({ _id: req.params.id }, function(err) {
         if(err) {
@@ -89,6 +90,6 @@ app.delete('/remove/:id', function(req, res){
     });
 });
 // Setting our Server to Listen on Port: 8000
-app.listen(8006, function() {
-    console.log("listening on port 8006");
+app.listen(8000, function() {
+    console.log("listening on port 8000");
 });
