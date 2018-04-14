@@ -3,15 +3,17 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <img width="100" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 <h1>All the tasks:</h1>
+<button (click)="onButtonClick()" >Click to get all tasks</button>
 <table margin="0 auto" width="100%">
-<tr><td><h3>Task</h3></td><td><h3>Description</h3></td></tr>
-<tr *ngFor="let task of tasks"><td>{{ task.title }} </td><td>-{{ task.description }}</td></tr>
+<tr><td><h3>Task - Description</h3></td><td><h3> Task Id</h3></td></tr>
+<tr *ngFor="let task of tasks"><td>{{ task.title }} - {{ task.description }}</td><td><button (click)="onButtonClickParam(task._id)">{{ task._id }}</button></td></tr>
 </table>
-<h1>The third task:</h1>
+<hr>
+<input #id type='text' id='id' name="id"><button (click)="onButtonClickParam(id.value)">Click to get one task</button>
 <table margin="0 auto" width="100%">
-<tr><td><h3>Task</h3></td><td><h3>-Description</h3></td></tr>
-<tr><td>{{ tasks[3].title }} -</td><td>{{ tasks[3].description }}</td></tr>
+<tr><td><h3>Task - Description</h3></td></tr>
+<tr><td>{{ task.title }} - {{ task.description }}</td></tr>
 </table>
 </div>

@@ -11,6 +11,7 @@ export class HttpService {
      return this._http.get('/task');
    }
    getTaskById(id){
+    console.log(id);
     var route_call = "/task/" + id; 
     return this._http.get(route_call);
   }
@@ -20,5 +21,4 @@ export class HttpService {
 
     tempObservable.subscribe(data => console.log("Task destroyed!", data));
   }
-
 }
