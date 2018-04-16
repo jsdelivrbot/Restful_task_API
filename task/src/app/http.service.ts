@@ -7,18 +7,21 @@ export class HttpService {
   constructor(private _http: HttpClient) {
   }
 
-   getTasks(){
-     return this._http.get('/task');
-   }
-   getTaskById(id){
+  getTasks(){
+    return this._http.get('/task');
+  }
+  getTaskById(id){
     console.log(id);
     var route_call = "/task/" + id; 
     return this._http.get(route_call);
   }
+  addTask(newTask){
+    console.log(newTask);
+    return this._http.post('/task/new', newTask);
+  };
   destroyTask(id){
     var route_call = "/task/remove/" + id;
     let tempObservable = this._http.delete(route_call);
-
     tempObservable.subscribe(data => console.log("Task destroyed!", data));
   }
 }

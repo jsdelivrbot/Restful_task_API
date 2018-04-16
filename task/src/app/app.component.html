@@ -16,4 +16,16 @@
 <tr><td><h3>Task - Description</h3></td></tr>
 <tr><td>{{ task.title }} - {{ task.description }}</td></tr>
 </table>
+<hr>
+<form (submit)="onSubmit()" class="postForm">
+  <h3>New Task</h3>
+  <p>{{ newTask | json }}</p>
+  <label>Task title:
+    <input type='text' name='newTask.title' [(ngModel)]='newTask.title'/>
+  </label>
+  <label>Task description:
+      <input type='text' name='newTask.description' [(ngModel)]='newTask.description'/>
+    </label>
+    <input type="submit" value="Create New Task" />
+</form>
 </div>
