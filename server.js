@@ -24,7 +24,7 @@ mongoose.Promise = global.Promise;
 
 app.get('/task', function(req, res){
     Task.find({}, function(err, tasks){
-        console.log(tasks);
+        // console.log(tasks);
         if(err){
             console.log("Returned error", err);
             // respond with JSON
@@ -62,14 +62,13 @@ app.post('/task/new', function(req, res){
         };
     });
 });
-app.put('/task/update/:id', function(req, res){
-    var id = req.params.id;
-    console.log(id);
-    // Try to save that new eagle to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
-    Task.update({_id: id}, { name: req.body.name, description: req.body.description }, function(err){
+app.put('/task/update', function(req, res){
+    var id = req.body._id;
+    // Try to save that new task to the database (this is the method that actually inserts into the db) and run a callback function with an error (if any) from the operation.
+    Task.update({_id: id}, { title: req.body.title, description: req.body.description }, function(err){
         // if there is an error console.log that something went wrong!
         if(err) {
-            console.log('something went wrong with new person save');
+            console.log('something went wrong with new task save');
             res.json({message: "Error", error: err});
         } else { // else console.log that we did well and then redirect to the root route
             console.log('successfully updated a Task!');
@@ -78,7 +77,6 @@ app.put('/task/update/:id', function(req, res){
     });
 });
 app.delete('/task/remove/:id', function(req, res){
-    console.log("id param:", req.params.id);
     Task.remove({ _id: req.params.id }, function(err) {
         if(err) {
             console.log('something went wrong with save');

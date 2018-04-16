@@ -5,27 +5,41 @@
   </h1>
   <img width="100" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 <h1>All the tasks:</h1>
-<button (click)="onButtonClick()" >Click to get all tasks</button>
 <table margin="0 auto" width="100%">
-<tr><td><h3>Task - Description</h3></td><td><h3> Task Id</h3></td></tr>
-<tr *ngFor="let task of tasks"><td>{{ task.title }} - {{ task.description }}</td><td><button (click)="onButtonClickParam(task._id)">{{ task._id }}</button></td></tr>
+<tr><td><h3>Task - Description</h3></td><td><h3> Do or Do Not</h3></td></tr>
+<tr *ngFor="let task of tasks"><td>{{ task.title }} - {{ task.description }}</td><td><button (click)="onClickDestroy(task._id)">Delete</button><button (click)="onClickEdit(task._id)">Edit</button></td></tr>
 </table>
 <hr>
-<input #id type='text' id='id' name="id"><button (click)="onButtonClickParam(id.value)">Click to get one task</button>
+<h3>Get A Task</h3>
+<form (click)="onButtonClickParam()" class="postForm">
+  <input type='text' name="task_id" [(ngModel)]="task_id">
+  <input type="submit" value="Get Your Task">
+</form>
 <table margin="0 auto" width="100%">
 <tr><td><h3>Task - Description</h3></td></tr>
 <tr><td>{{ task.title }} - {{ task.description }}</td></tr>
 </table>
 <hr>
-<form (submit)="onSubmit()" class="postForm">
-  <h3>New Task</h3>
-  <p>{{ newTask | json }}</p>
-  <label>Task title:
-    <input type='text' name='newTask.title' [(ngModel)]='newTask.title'/>
-  </label>
-  <label>Task description:
-      <input type='text' name='newTask.description' [(ngModel)]='newTask.description'/>
+  <form (submit)="onSubmit()" class="postForm">
+    <h3>New Task</h3>
+    <label>Task title:
+      <input type='text' name='newTask.title' [(ngModel)]='newTask.title'/>
     </label>
-    <input type="submit" value="Create New Task" />
-</form>
+    <label>Task description:
+        <input type='text' name='newTask.description' [(ngModel)]='newTask.description'/>
+      </label>
+      <input type="submit" value="Create New Task" />
+  </form>
+<hr>
+  <form (submit)="onClickUpdate()" class="postForm">
+    <h3>Edit Task</h3>
+    <label>Task title:
+      <input type="hidden" name="task._id" [(ngModel)]="task._id"/>
+      <input type='text' name='task.title' [(ngModel)]='task.title'/>
+    </label>
+    <label>Task description:
+        <input type='text' name='task.description' [(ngModel)]='task.description'/>
+    </label>
+      <input type="submit" value="Submit Edits" />
+  </form>
 </div>

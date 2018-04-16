@@ -11,10 +11,11 @@ export class AppComponent implements OnInit {
   tasks = [];
   task = [];
   newTask: any;
+  task_id: any;
 
   constructor(private _httpService: HttpService){
-
   }
+
   ngOnInit(){
     this.newTask = {title: "", description: ""};
     this.getTasksFromService();
@@ -29,11 +30,8 @@ export class AppComponent implements OnInit {
   onButtonClick(): void { 
     this.getTasksFromService();
   }
-  onButtonClickParam(id: String): void { 
-    console.log(id);
-    var task_id = id;
-    console.log("id in app.component.ts:", task_id);
-    let observable = this._httpService.getTaskById(task_id);
+  onButtonClickParam(): void { 
+    let observable = this._httpService.getTaskById(this.task_id);
     observable.subscribe(data => {
       console.log("Got our task!", data);
       this.task = data['data'];
@@ -45,5 +43,26 @@ export class AppComponent implements OnInit {
       console.log("Got our post back!", data);
       this.newTask = {title: "", description: ""};
     });
+    this.getTasksFromService();
+  };
+  onClickEdit(task_id){
+    this.task_id = task_id;
+    this.onButtonClickParam();
+  };
+  onClickUpdate(){
+    let observable = this._httpService.updateTask(this.task);
+    observable.subscribe(data => {
+      console.log("Got our post back!", data);
+      this.task = [];
+    });
+    this.getTasksFromService();
+  };
+  onClickDestroy(task_id){
+    let observable = this._httpService.destroyTask(task_id);
+    observable.subscribe(data => {
+      console.log("Got our delete back!", data);
+      this.task = [];
+    });
+    this.getTasksFromService();
   };
 }

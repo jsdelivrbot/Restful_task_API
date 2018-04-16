@@ -19,9 +19,13 @@ export class HttpService {
     console.log(newTask);
     return this._http.post('/task/new', newTask);
   };
+  updateTask(editTask){
+    console.log("updateTask:", editTask)
+    return this._http.put('/task/update', editTask);
+  };
   destroyTask(id){
+    console.log('destroyTask:', id)
     var route_call = "/task/remove/" + id;
-    let tempObservable = this._http.delete(route_call);
-    tempObservable.subscribe(data => console.log("Task destroyed!", data));
+    return this._http.delete(route_call);
   }
 }
